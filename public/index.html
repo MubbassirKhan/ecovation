@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ecovation | Sustainable Interiors & Acoustic Solutions</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            forest: {
+              900: '#1a1a1a',
+              800: '#2d2d2d',
+              700: '#404040',
+              600: '#525252',
+              500: '#666666',
+              400: '#878787',
+              300: '#a8a8a8',
+            },
+            cream: {
+              50: '#ffffff',
+              100: '#f9f9f9',
+              200: '#f0f0f0',
+              300: '#e8e8e8',
+            },
+            amber: {
+              eco: '#d97706',
+              light: '#f59e0b',
+              pale: '#fef3c7',
+            },
+            slate: {
+              eco: '#f3f4f6',
+            }
+          },
+          fontFamily: {
+            display: ['"Times New Roman"', 'Times', 'serif'],
+            serif: ['"Times New Roman"', 'Times', 'serif'],
+            body: ['"Times New Roman"', 'Times', 'serif'],
+          },
+          animation: {
+            'fade-up': 'fadeUp 0.8s ease forwards',
+            'fade-in': 'fadeIn 0.6s ease forwards',
+            'slide-left': 'slideLeft 0.8s ease forwards',
+            'counter': 'counter 2s ease forwards',
+          },
+          keyframes: {
+            fadeUp: {
+              '0%': { opacity: '0', transform: 'translateY(40px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideLeft: {
+              '0%': { opacity: '0', transform: 'translateX(40px)' },
+              '100%': { opacity: '1', transform: 'translateX(0)' },
+            },
+            progress: {
+              '0%': { width: '0%' },
+              '100%': { width: '100%' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { overflow-x: hidden; width: 100%; position: relative; }
+    body { font-family: 'Times New Roman', Times, serif; background: #ffffff; color: #1a1a1a; margin: 0; padding: 0; }
+    .font-display { font-family: 'Times New Roman', Times, serif; letter-spacing: 0.05em; }
+    .font-serif { font-family: 'Times New Roman', Times, serif; }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #f9f9f9; }
+    ::-webkit-scrollbar-thumb { background: #d97706; }
+
+    /* Noise texture overlay */
+    .noise::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      opacity: 0.4;
+      z-index: 0;
+    }
+
+    /* Reveal animation */
+    .reveal { opacity: 0; transform: translateY(40px); transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left { opacity: 0; transform: translateX(-40px); transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right { opacity: 0; transform: translateX(40px); transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+    /* Stagger delays */
+    .delay-100 { transition-delay: 0.1s; }
+    .delay-200 { transition-delay: 0.2s; }
+    .delay-300 { transition-delay: 0.3s; }
+    .delay-400 { transition-delay: 0.4s; }
+    .delay-500 { transition-delay: 0.5s; }
+
+    /* Marquee */
+    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .marquee-track { animation: marquee 20s linear infinite; }
+
+    /* Tab active */
+    .tab-active { background: #d97706 !important; color: #ffffff !important; }
+
+    /* Spec table */
+    .spec-row:hover td { background: rgba(217, 119, 6, 0.08); }
+
+    /* Card hover line */
+    .card-line { width: 0; height: 2px; background: #d97706; transition: width 0.4s ease; }
+    .group:hover .card-line { width: 100%; }
+
+    /* Image zoom */
+    .img-zoom { overflow: hidden; }
+    .img-zoom img { transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+    .img-zoom:hover img { transform: scale(1.06); }
+
+    /* Nav link hover */
+    .nav-link-item { position: relative; }
+    .nav-link-item::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: #c8922a; transition: width 0.3s ease; }
+    .nav-link-item:hover::after, .nav-link-item.active::after { width: 100%; }
+    .nav-link-item.active { color: #c8922a; }
+
+    /* Hero grid bg */
+    .grid-bg {
+      background-image: 
+        linear-gradient(rgba(200,146,42,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,146,42,0.05) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* Gradient text */
+    .text-gradient { background: linear-gradient(135deg, #e8b84b, #c8922a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    /* Glow */
+    .amber-glow { box-shadow: 0 0 40px rgba(200,146,42,0.15); }
+
+    /* Mobile menu */
+    .mobile-nav { transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+    .mobile-nav.open { transform: translateX(0); }
+
+    /* Counter */
+    .stat-val { font-family: 'Bebas Neue', sans-serif; }
+
+    /* Section border decoration */
+    .section-tag { border-left: 3px solid #c8922a; padding-left: 12px; }
+
+    /* Panel thumbnail */
+    .thumb-btn.active-t { border-color: #c8922a; opacity: 1; }
+
+    /* Smooth scroll */
+    html { scroll-behavior: smooth; }
+
+    /* Form focus */
+    input:focus, textarea:focus, select:focus { outline: none; border-color: #c8922a !important; box-shadow: 0 0 0 2px rgba(200,146,42,0.2); }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+</body>
+</html>
