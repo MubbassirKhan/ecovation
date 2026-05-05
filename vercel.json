@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.ecovation.co.in"
+        }
+      ],
+      "destination": "https://ecovation.co.in/:path*",
+      "permanent": true
+    }
+  ]
+}
