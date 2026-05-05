@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const panelTypes = [
   {
@@ -84,12 +85,13 @@ const colors = [
   '#37474f','#455a64','#546e7a','#607d8b','#90a4ae','#cfd8dc',
 ];
 
-export default function AcousticPage({ onTabChange }) {
+export default function AcousticPage() {
+  const navigate = useNavigate();
   const [selectedColor, setSelectedColor] = useState(null);
   const [activeSpec, setActiveSpec] = useState(null);
 
   return (
-    <div className="pt-20 md:pt-24">
+    <div id="main-content">
       {/* Hero */}
       <section className="relative py-36 bg-cream-50 grid-bg overflow-hidden">
         <div className="absolute top-0 right-0 w-1 h-full bg-amber-eco"></div>
@@ -337,7 +339,7 @@ export default function AcousticPage({ onTabChange }) {
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10 reveal">
           <h2 className="font-display text-6xl md:text-8xl text-forest-900 mb-6 leading-none">READY TO<br/><span className="text-gradient">UPGRADE?</span></h2>
           <p className="font-body text-forest-900 text-lg mb-10">Get a custom quote for your acoustic panel requirements.</p>
-          <button onClick={() => onTabChange('contact')} className="px-12 py-5 bg-amber-eco text-forest-900 font-body font-semibold tracking-wide hover:bg-amber-light transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-amber-eco/30 inline-flex items-center gap-3">
+          <button onClick={() => navigate('/contact')} className="px-12 py-5 bg-amber-eco text-forest-900 font-body font-semibold tracking-wide hover:bg-amber-light transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-amber-eco/30 inline-flex items-center gap-3">
             GET A QUOTE <i className="fas fa-arrow-right"></i>
           </button>
         </div>

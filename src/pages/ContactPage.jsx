@@ -22,9 +22,20 @@ export default function ContactPage() {
     setErrors(e);
     if (Object.keys(e).length) return;
     setLoading(true);
-    await new Promise(r => setTimeout(r, 1500));
+    
+    // TODO: Integrate EmailJS here
+    // Example integration (uncomment when EmailJS is set up):
+    // import emailjs from '@emailjs/browser';
+    // emailjs.send(SERVICE_ID, TEMPLATE_ID, formData)
+    //   .then(() => { setSubmitted(true); setForm(...reset); })
+    //   .catch(err => setErrors({submit: 'Failed to send. Please try again.'}))
+    // .finally(() => setLoading(false));
+    
+    // For now, simulate submission
+    await new Promise(r => setTimeout(r, 500));
     setLoading(false);
     setSubmitted(true);
+    setForm({ name: '', email: '', phone: '', service: '', subject: '', message: '', terms: false });
   };
 
   const handleChange = (field, val) => {
@@ -33,26 +44,78 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="pt-20 md:pt-24">
+    <div id="main-content">
       {/* Hero */}
-      <section className="relative py-36 bg-gray-100 grid-bg overflow-hidden">
+      <section className="relative py-24 sm:py-36 bg-gray-100 grid-bg overflow-hidden">
         <div className="absolute top-0 left-0 w-1 h-full bg-amber-eco"></div>
+        
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="inline-flex items-center gap-2 border border-amber-eco/30 px-4 py-2 mb-8">
-            <i className="fas fa-headset text-amber-eco text-xs"></i>
-            <span className="font-body text-amber-eco text-xs tracking-[0.2em] uppercase">We're Here to Help</span>
+          <div className="grid lg:grid-cols-2 gap-12 sm:gap-16 items-center">
+            {/* Left Content */}
+            <div className="text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 border border-amber-eco/30 px-4 py-2 mb-8">
+                <i className="fas fa-headset text-amber-eco text-xs"></i>
+                <span className="font-body text-amber-eco text-xs tracking-[0.2em] uppercase">We're Here to Help</span>
+              </div>
+              <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl xl:text-9xl text-forest-900 leading-tight sm:leading-tight lg:leading-none mb-6">GET IN<br/><span className="text-gradient">TOUCH</span></h1>
+              <p className="font-body text-forest-700 text-base sm:text-lg lg:text-xl max-w-xl leading-relaxed mx-auto lg:mx-0">
+                Have a project in mind? Send us a message and we'll respond within 24 hours.
+              </p>
+            </div>
+
+            {/* Right - Decorative Graphic */}
+            <div className="hidden lg:flex items-center justify-center relative h-96">
+              {/* Background circles */}
+              <div className="absolute w-80 h-80 border border-amber-eco/10 rounded-full"></div>
+              <div className="absolute w-60 h-60 border border-amber-eco/20 rounded-full"></div>
+              <div className="absolute w-40 h-40 bg-amber-eco/5 rounded-full"></div>
+
+              {/* Center content with icons */}
+              <div className="relative z-10 flex flex-col items-center justify-center">
+                {/* Top icon */}
+                <div className="mb-8 relative">
+                  <div className="w-20 h-20 bg-amber-eco/10 border border-amber-eco/40 rounded-full flex items-center justify-center">
+                    <i className="fas fa-message text-3xl text-amber-eco"></i>
+                  </div>
+                </div>
+
+                {/* Center text */}
+                <div className="text-center mb-8">
+                  <p className="font-body text-forest-900 font-semibold text-lg">Fast Response</p>
+                  <p className="font-body text-forest-600 text-xs text-center mt-1 max-w-xs">We reply to all inquiries within 24 hours</p>
+                </div>
+
+                {/* Bottom three icons */}
+                <div className="flex gap-6 items-center justify-center">
+                  <div className="text-center">
+                    <div className="w-16 h-16 bg-amber-eco/5 border border-amber-eco/30 rounded-lg flex items-center justify-center mx-auto mb-2 group hover:border-amber-eco hover:bg-amber-eco/10 transition-all duration-300">
+                      <i className="fas fa-check text-xl text-forest-900 group-hover:text-amber-eco"></i>
+                    </div>
+                    <p className="font-body text-forest-600 text-xs font-semibold">Expert Team</p>
+                  </div>
+                  <div className="text-center">
+                    <div className="w-16 h-16 bg-amber-eco/5 border border-amber-eco/30 rounded-lg flex items-center justify-center mx-auto mb-2 group hover:border-amber-eco hover:bg-amber-eco/10 transition-all duration-300">
+                      <i className="fas fa-lightbulb text-xl text-forest-900 group-hover:text-amber-eco"></i>
+                    </div>
+                    <p className="font-body text-forest-600 text-xs font-semibold">Creative Ideas</p>
+                  </div>
+                  <div className="text-center">
+                    <div className="w-16 h-16 bg-amber-eco/5 border border-amber-eco/30 rounded-lg flex items-center justify-center mx-auto mb-2 group hover:border-amber-eco hover:bg-amber-eco/10 transition-all duration-300">
+                      <i className="fas fa-handshake text-xl text-forest-900 group-hover:text-amber-eco"></i>
+                    </div>
+                    <p className="font-body text-forest-600 text-xs font-semibold">Professional</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <h1 className="font-display text-5xl md:text-9xl text-forest-900 leading-none mb-6">GET IN<br/><span className="text-gradient">TOUCH</span></h1>
-          <p className="font-body text-forest-700 text-xl max-w-xl leading-relaxed">
-            Have a project in mind? Send us a message and we'll respond within 24 hours.
-          </p>
         </div>
       </section>
 
       {/* Quick Cards */}
-      <section className="py-12 bg-cream-50 border-b border-gray-300">
+      <section className="py-8 sm:py-12 bg-cream-50 border-b border-gray-300">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {[
               { href: 'tel:+919513877866', icon: 'fa-phone', label: 'Call Us', value: '+91 9513877866', iconColor: 'text-amber-eco' },
               { href: 'mailto:info@ecovation.co.in', icon: 'fa-envelope', label: 'Email Us', value: 'info@ecovation.co.in', iconColor: 'text-amber-eco' },
@@ -62,23 +125,23 @@ export default function ContactPage() {
               <div key={i} className="group">
                 {c.href ? (
                   <a href={c.href} target={c.fab ? '_blank' : undefined} rel="noopener noreferrer"
-                    className="flex items-center gap-4 p-6 border border-gray-300 hover:border-amber-eco transition-all duration-300 bg-cream-50 hover:bg-gray-100 reveal">
-                    <div className="w-12 h-12 border border-gray-300 group-hover:border-amber-eco flex items-center justify-center flex-shrink-0 transition-colors">
-                      <i className={`${c.fab ? 'fab' : 'fas'} ${c.icon} ${c.iconColor} text-base`}></i>
+                    className="flex items-center gap-4 p-5 border border-gray-300 hover:border-amber-eco transition-all duration-300 bg-cream-50 hover:bg-gray-100 reveal">
+                    <div className="w-10 h-10 border border-gray-300 group-hover:border-amber-eco flex items-center justify-center flex-shrink-0 transition-colors">
+                      <i className={`${c.fab ? 'fab' : 'fas'} ${c.icon} ${c.iconColor} text-sm`}></i>
                     </div>
                     <div className="min-w-0">
-                      <p className="font-body text-forest-600 text-[10px] uppercase tracking-wider">{c.label}</p>
-                      <p className="font-body text-forest-900 text-sm font-semibold truncate">{c.value}</p>
+                      <p className="font-body text-forest-600 text-xs uppercase tracking-wider">{c.label}</p>
+                      <p className="font-body text-forest-900 text-sm font-medium truncate">{c.value}</p>
                     </div>
                   </a>
                 ) : (
-                  <div className="flex items-center gap-4 p-6 border border-gray-300 bg-cream-50 reveal">
-                    <div className="w-12 h-12 border border-gray-300 flex items-center justify-center flex-shrink-0">
-                      <i className={`fas ${c.icon} ${c.iconColor} text-base`}></i>
+                  <div className="flex items-center gap-4 p-5 border border-gray-300 bg-cream-50 reveal">
+                    <div className="w-10 h-10 border border-gray-300 flex items-center justify-center flex-shrink-0">
+                      <i className={`fas ${c.icon} ${c.iconColor} text-sm`}></i>
                     </div>
                     <div>
-                      <p className="font-body text-forest-600 text-[10px] uppercase tracking-wider">{c.label}</p>
-                      <p className="font-body text-forest-900 text-sm font-semibold">{c.value}</p>
+                      <p className="font-body text-forest-600 text-xs uppercase tracking-wider">{c.label}</p>
+                      <p className="font-body text-forest-900 text-sm font-medium">{c.value}</p>
                     </div>
                   </div>
                 )}
@@ -89,11 +152,16 @@ export default function ContactPage() {
       </section>
 
       {/* Form + Info */}
-      <section className="py-32 bg-cream-50">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16 reveal">
+      <section className="py-24 sm:py-32 bg-cream-50 relative overflow-hidden">
+        {/* Decorative background elements */}
+        <div className="absolute top-0 right-0 w-96 h-96 border border-amber-eco/10 hidden sm:block"></div>
+        <div className="absolute bottom-12 right-32 w-32 h-32 border border-amber-eco/5 hidden sm:block"></div>
+        <div className="absolute top-20 right-20 w-48 h-48 border border-amber-eco/5 hidden sm:block"></div>
+
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="text-center mb-12 sm:mb-16 reveal px-4">
             <span className="font-body text-amber-eco text-xs tracking-[0.3em] uppercase font-semibold">Send a Message</span>
-            <h2 className="font-display text-5xl md:text-7xl text-forest-900 mt-2">LET'S <span className="text-gradient">TALK</span></h2>
+            <h2 className="font-display text-3xl sm:text-5xl lg:text-6xl xl:text-7xl text-forest-900 mt-4">LET'S <span className="text-amber-eco">TALK</span></h2>
           </div>
           <div className="grid lg:grid-cols-3 gap-12">
 
@@ -135,20 +203,28 @@ export default function ContactPage() {
             </aside>
 
             {/* Form */}
-            <div className="lg:col-span-2 reveal reveal-right delay-200">
-              {submitted ? (
-                <div className="border border-amber-eco/30 bg-gray-100 p-16 text-center">
-                  <div className="w-16 h-16 bg-amber-eco flex items-center justify-center mx-auto mb-6">
-                    <i className="fas fa-check text-2xl text-forest-900"></i>
-                  </div>
-                  <h3 className="font-display text-4xl text-forest-900 mb-4">MESSAGE SENT!</h3>
-                  <p className="font-body text-forest-700">Thank you for reaching out. We'll respond within 24 hours.</p>
-                  <button onClick={() => setSubmitted(false)} className="mt-8 px-8 py-3 border border-amber-eco text-amber-eco font-body text-sm hover:bg-amber-eco hover:text-forest-900 transition-all">
-                    Send Another
-                  </button>
+            <div className="lg:col-span-2 reveal reveal-right delay-200 relative">
+              {/* Visual accent */}
+              <div className="absolute -top-12 -right-12 w-24 h-24 border border-amber-eco/20"></div>
+              <div className="absolute bottom-24 right-0 w-32 h-32 bg-amber-eco/3"></div>
+              
+              <div className="relative z-10 bg-white border border-gray-300 p-8 md:p-10">
+                <div aria-live="polite" aria-atomic="true" className="sr-only">
+                  {submitted && "Message sent successfully. Thank you for reaching out. We'll respond within 24 hours."}
                 </div>
-              ) : (
-                <form onSubmit={handleSubmit} noValidate>
+                {submitted ? (
+                  <div className="text-center">
+                    <div className="w-16 h-16 bg-amber-eco flex items-center justify-center mx-auto mb-6">
+                      <i className="fas fa-check text-2xl text-forest-900"></i>
+                    </div>
+                    <h3 className="font-display text-4xl text-forest-900 mb-4">MESSAGE SENT!</h3>
+                    <p className="font-body text-forest-700">Thank you for reaching out. We'll respond within 24 hours.</p>
+                    <button onClick={() => setSubmitted(false)} className="mt-8 px-8 py-3 border border-amber-eco text-amber-eco font-body text-sm hover:bg-amber-eco hover:text-forest-900 transition-all">
+                      Send Another
+                    </button>
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubmit} noValidate>
                   <div className="grid md:grid-cols-2 gap-4 mb-4">
                     {[
                       { field: 'name', label: 'Full Name', type: 'text', placeholder: 'John Smith', required: true },
@@ -156,23 +232,26 @@ export default function ContactPage() {
                       { field: 'phone', label: 'Phone Number', type: 'tel', placeholder: '+91 XXXXXXXXXX' },
                     ].map(f => (
                       <div key={f.field} className={f.field === 'phone' ? '' : ''}>
-                        <label className="font-body text-xs text-forest-700 uppercase tracking-wider block mb-2">
+                        <label htmlFor={`field-${f.field}`} className="font-body text-xs text-forest-700 uppercase tracking-wider block mb-2">
                           {f.label} {f.required && <span className="text-amber-eco">*</span>}
                         </label>
                         <input
+                          id={`field-${f.field}`}
                           type={f.type}
                           value={form[f.field]}
                           onChange={e => handleChange(f.field, e.target.value)}
                           placeholder={f.placeholder}
-                          className={`w-full bg-gray-100 border text-forest-900 font-body text-sm px-4 py-3 placeholder-forest-500 transition-all duration-300 ${errors[f.field] ? 'border-red-500' : 'border-gray-300'}`}
+                          className={`w-full bg-gray-100 border text-forest-900 font-body text-sm px-4 py-3 placeholder-forest-600 transition-all duration-300 ${errors[f.field] ? 'border-red-500' : 'border-gray-300'}`}
+                          aria-describedby={errors[f.field] ? `error-${f.field}` : undefined}
                         />
-                        {errors[f.field] && <p className="text-red-400 text-xs mt-1 font-body">{errors[f.field]}</p>}
+                        {errors[f.field] && <p id={`error-${f.field}`} className="text-red-400 text-xs mt-1 font-body">{errors[f.field]}</p>}
                       </div>
                     ))}
 
                     <div>
-                      <label className="font-body text-xs text-forest-700 uppercase tracking-wider block mb-2">Service Interested In</label>
+                      <label htmlFor="field-service" className="font-body text-xs text-forest-700 uppercase tracking-wider block mb-2">Service Interested In</label>
                       <select
+                        id="field-service"
                         value={form.service}
                         onChange={e => handleChange('service', e.target.value)}
                         className="w-full bg-gray-100 border border-gray-300 text-forest-900 font-body text-sm px-4 py-3 transition-all duration-300 appearance-none"
@@ -187,38 +266,51 @@ export default function ContactPage() {
                   </div>
 
                   <div className="mb-4">
-                    <label className="font-body text-xs text-forest-700 uppercase tracking-wider block mb-2">
+                    <label htmlFor="field-subject" className="font-body text-xs text-forest-700 uppercase tracking-wider block mb-2">
                       Subject <span className="text-amber-eco">*</span>
                     </label>
                     <input
+                      id="field-subject"
                       type="text"
                       value={form.subject}
                       onChange={e => handleChange('subject', e.target.value)}
                       placeholder="What is this regarding?"
-                      className={`w-full bg-gray-100 border text-forest-900 font-body text-sm px-4 py-3 placeholder-forest-500 transition-all duration-300 ${errors.subject ? 'border-red-500' : 'border-gray-300'}`}
+                      className={`w-full bg-gray-100 border text-forest-900 font-body text-sm px-4 py-3 placeholder-forest-600 transition-all duration-300 ${errors.subject ? 'border-red-500' : 'border-gray-300'}`}
+                      aria-describedby={errors.subject ? 'error-subject' : undefined}
                     />
-                    {errors.subject && <p className="text-red-400 text-xs mt-1 font-body">{errors.subject}</p>}
+                    {errors.subject && <p id="error-subject" className="text-red-400 text-xs mt-1 font-body">{errors.subject}</p>}
                   </div>
 
                   <div className="mb-6">
-                    <label className="font-body text-xs text-forest-700 uppercase tracking-wider block mb-2">
+                    <label htmlFor="field-message" className="font-body text-xs text-forest-700 uppercase tracking-wider block mb-2">
                       Your Message <span className="text-amber-eco">*</span>
                     </label>
                     <textarea
+                      id="field-message"
                       rows={6}
                       value={form.message}
                       onChange={e => handleChange('message', e.target.value)}
                       placeholder="Tell us about your project, space size, timeline, or any questions…"
-                      className={`w-full bg-gray-100 border text-forest-900 font-body text-sm px-4 py-3 placeholder-forest-500 transition-all duration-300 resize-none ${errors.message ? 'border-red-500' : 'border-gray-300'}`}
+                      className={`w-full bg-gray-100 border text-forest-900 font-body text-sm px-4 py-3 placeholder-forest-600 transition-all duration-300 resize-none ${errors.message ? 'border-red-500' : 'border-gray-300'}`}
+                      aria-describedby={errors.message ? 'error-message' : undefined}
                     />
-                    {errors.message && <p className="text-red-400 text-xs mt-1 font-body">{errors.message}</p>}
+                    {errors.message && <p id="error-message" className="text-red-400 text-xs mt-1 font-body">{errors.message}</p>}
                   </div>
 
                   <div className="mb-8">
                     <label className="flex items-center gap-3 cursor-pointer group">
+                      <input 
+                        type="checkbox"
+                        id="field-terms"
+                        checked={form.terms}
+                        onChange={e => handleChange('terms', e.target.checked)}
+                        className="sr-only"
+                        aria-label="I agree to the terms and conditions"
+                      />
                       <div
                         onClick={() => handleChange('terms', !form.terms)}
                         className={`w-5 h-5 border flex-shrink-0 flex items-center justify-center cursor-pointer transition-all duration-200 ${form.terms ? 'bg-amber-eco border-amber-eco' : 'border-forest-500 hover:border-amber-eco'}`}
+                        aria-hidden="true"
                       >
                         {form.terms && <i className="fas fa-check text-forest-900 text-xs"></i>}
                       </div>
@@ -242,6 +334,7 @@ export default function ContactPage() {
                   </button>
                 </form>
               )}
+              </div>
             </div>
           </div>
         </div>
@@ -252,19 +345,15 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16 reveal">
             <span className="font-body text-amber-eco text-xs tracking-[0.3em] uppercase font-semibold">Location</span>
-            <h2 className="font-display text-5xl md:text-7xl text-forest-900 mt-2">FIND OUR <span className="text-gradient">OFFICE</span></h2>
+            <h2 className="font-display text-6xl md:text-7xl text-forest-900 mt-2">FIND OUR <span className="text-gradient">OFFICE</span></h2>
           </div>
           <div className="grid lg:grid-cols-2 gap-8 reveal">
-            <div className="bg-white border border-gray-300 p-8 md:p-12 flex flex-col items-center justify-center text-center group hover:border-amber-eco transition-all duration-500">
-              <div className="w-16 h-16 bg-gray-100 flex items-center justify-center mb-6 group-hover:bg-amber-eco/10 transition-colors">
-                <i className="fas fa-map-location-dot text-3xl text-amber-eco"></i>
+            <div className="bg-gray-200 border border-gray-300 aspect-video flex items-center justify-center">
+              <div className="text-center p-8">
+                <i className="fas fa-map-location-dot text-5xl text-forest-700 mb-4"></i>
+                <p className="font-body text-forest-600 text-sm mb-2">Ecovation Office</p>
+                <p className="font-body text-forest-700 text-xs">Nagasandra, Bangalore</p>
               </div>
-              <h3 className="font-display text-2xl text-forest-900 mb-3">ECOVATION OFFICE</h3>
-              <p className="font-body text-forest-700 text-sm leading-relaxed">
-                Unit No, B/19/01, Nagasandra Tumkur Road<br/>
-                Bangalore, Karnataka — 560073, India
-              </p>
-              <div className="card-line mt-6 w-12 group-hover:w-24 mx-auto"></div>
             </div>
             <div className="border border-gray-300 overflow-hidden">
               <iframe
