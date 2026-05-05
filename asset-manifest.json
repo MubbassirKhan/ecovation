@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.01244e10.css",
-    "main.js": "/static/js/main.1a1263fa.js",
-    "static/media/fa-solid-900.woff2": "/static/media/fa-solid-900.ce9a3fa740bd60b4ac3b.woff2",
-    "static/media/fa-brands-400.woff2": "/static/media/fa-brands-400.f276979f97f1cf375d23.woff2",
-    "static/media/fa-regular-400.woff2": "/static/media/fa-regular-400.cfbad32c79d9dda6af4a.woff2",
-    "static/media/fa-v4compatibility.woff2": "/static/media/fa-v4compatibility.296da06936a3373940c8.woff2",
-    "index.html": "/index.html",
-    "main.01244e10.css.map": "/static/css/main.01244e10.css.map",
-    "main.1a1263fa.js.map": "/static/js/main.1a1263fa.js.map"
+    "main.css": "/ecovation/static/css/main.3d8028c5.css",
+    "main.js": "/ecovation/static/js/main.1a1263fa.js",
+    "static/media/fa-solid-900.woff2": "/ecovation/static/media/fa-solid-900.ce9a3fa740bd60b4ac3b.woff2",
+    "static/media/fa-brands-400.woff2": "/ecovation/static/media/fa-brands-400.f276979f97f1cf375d23.woff2",
+    "static/media/fa-regular-400.woff2": "/ecovation/static/media/fa-regular-400.cfbad32c79d9dda6af4a.woff2",
+    "static/media/fa-v4compatibility.woff2": "/ecovation/static/media/fa-v4compatibility.296da06936a3373940c8.woff2",
+    "index.html": "/ecovation/index.html",
+    "main.3d8028c5.css.map": "/ecovation/static/css/main.3d8028c5.css.map",
+    "main.1a1263fa.js.map": "/ecovation/static/js/main.1a1263fa.js.map"
   },
   "entrypoints": [
-    "static/css/main.01244e10.css",
+    "static/css/main.3d8028c5.css",
     "static/js/main.1a1263fa.js"
   ]
 }
