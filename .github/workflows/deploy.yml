@@ -1,28 +1,33 @@
-name: Deploy to GitHub Pages
+name: Deploy Vite React App
 
 on:
   push:
-    branches: [ "main" ] # Change to 'master' if your main branch is named 'master'
+    branches:
+      - main
+
+permissions:
+  contents: write
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '18' # Or your version
+          node-version: 22
 
-      - name: Install dependencies
-        run: npm i
+      - name: Install Dependencies
+        run: npm install
 
-      - name: Build
+      - name: Build Project
         run: npm run build
 
-      - name: Deploy
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
