@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
-import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import WorkspacesPage from './pages/WorkspacesPage';
+import ResidencyPage from './pages/ResidencyPage';
 import AcousticPage from './pages/AcousticPage';
-import ContactPage from './pages/ContactPage';
+import AboutPage from './pages/AboutPage';
 import NotFound from './pages/NotFound';
 import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
 
 function AppContent() {
   const location = useLocation();
@@ -42,21 +44,6 @@ function AppContent() {
     return () => observer.disconnect();
   }, [location.pathname]);
 
-  // Counter animation
-  useEffect(() => {
-    const counters = document.querySelectorAll('[data-count]');
-    counters.forEach(counter => {
-      const target = parseInt(counter.getAttribute('data-count'));
-      let current = 0;
-      const step = Math.ceil(target / 60);
-      const timer = setInterval(() => {
-        current = Math.min(current + step, target);
-        counter.textContent = current;
-        if (current >= target) clearInterval(timer);
-      }, 30);
-    });
-  }, [location.pathname]);
-
   return (
     <div className="min-h-screen bg-cream-50">
       <Navbar />
@@ -64,11 +51,14 @@ function AppContent() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/workspaces" element={<WorkspacesPage />} />
+          <Route path="/residency" element={<ResidencyPage />} />
           <Route path="/acoustic" element={<AcousticPage />} />
-          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<Navigate to="/about" replace />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
+      <ScrollToTop />
       <Footer />
     </div>
   );

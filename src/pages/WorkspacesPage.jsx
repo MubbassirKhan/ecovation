@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { WHATSAPP_URL } from '../data/siteData';
 
 const solutions = [
   { icon: 'fa-people-group', title: 'Open Office Areas', desc: 'Layouts that balance teamwork with acoustic comfort and natural flow.' },
@@ -24,22 +25,47 @@ export default function WorkspacesPage() {
   return (
     <div id="main-content">
       {/* Hero */}
-      <section className="relative py-24 sm:py-36 bg-gray-50 grid-bg overflow-hidden">
+      <section className="relative py-36 bg-cream-50 grid-bg overflow-hidden">
         <div className="absolute top-0 left-0 w-1 h-full bg-amber-eco"></div>
-        <div className="absolute top-12 right-12 w-48 h-48 border border-amber-eco/15 hidden sm:block"></div>
-        <div className="absolute bottom-12 right-24 w-24 h-24 border border-amber-eco/10 hidden sm:block"></div>
+        <div className="absolute top-16 right-16 w-32 h-32 border border-amber-eco/15 hidden lg:block"></div>
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="max-w-3xl mx-auto sm:mx-0 text-center sm:text-left">
-            <div className="inline-flex items-center gap-2 border border-amber-eco/30 px-4 py-2 mb-8">
-              <span className="w-1.5 h-1.5 bg-amber-eco"></span>
-              <span className="font-body text-amber-eco text-xs tracking-[0.2em] uppercase">Interior Design & Fit-Out</span>
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12">
+            <div className="text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 border border-amber-eco/30 px-4 py-2 mb-8 mx-auto lg:mx-0">
+                <span className="w-1.5 h-1.5 bg-amber-eco"></span>
+                <span className="font-body text-amber-eco text-[10px] sm:text-xs tracking-[0.2em] uppercase">Workplace Design • Interior Fit-Out</span>
+              </div>
+              <h1 className="font-display text-5xl md:text-9xl text-forest-900 leading-none">
+                MODERN<br/><span className="text-gradient">WORKSPACES</span>
+              </h1>
             </div>
-            <h1 className="font-display text-3xl sm:text-6xl md:text-9xl text-forest-900 leading-tight sm:leading-none mb-6">
-              MODERN<br/><span className="text-gradient">WORKSPACES</span>
-            </h1>
-            <p className="font-body text-forest-700 text-base sm:text-xl leading-relaxed max-w-xl mx-auto sm:mx-0">
-              Sustainable workplace design and fit-outs that improve productivity, comfort, and brand experience.
-            </p>
+            <div className="lg:max-w-sm text-center lg:text-left mt-8 lg:mt-0">
+              <p className="font-body text-forest-900 text-base md:text-lg leading-relaxed mb-8 mx-auto lg:mx-0">
+                Sustainable workplace design and fit-outs that improve productivity, comfort, and brand experience through smart space planning and acoustic solutions.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 items-center sm:items-start justify-center lg:justify-start mb-6">
+                <button className="w-full sm:w-auto px-6 py-3 bg-amber-eco text-forest-900 font-body font-semibold hover:bg-amber-light transition-all duration-300 hover:shadow-xl hover:shadow-amber-eco/30 flex items-center justify-center gap-2 text-sm border border-amber-eco">
+                  <i className="fas fa-building text-xs"></i> Get Started
+                </button>
+                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto px-6 py-3 border border-forest-900 text-forest-900 font-body font-semibold hover:bg-forest-900 hover:text-white transition-all duration-300 flex items-center justify-center gap-2 text-sm">
+                  <i className="fab fa-whatsapp"></i> Chat
+                </a>
+              </div>
+              <div className="grid grid-cols-3 gap-2 md:gap-3">
+                <div className="text-center border border-gray-300 p-2 md:px-6 md:py-4">
+                  <div className="font-display text-2xl md:text-3xl text-amber-eco">6</div>
+                  <div className="font-body text-forest-800 text-[9px] md:text-xs mt-1">Process Steps</div>
+                </div>
+                <div className="text-center border border-gray-300 p-2 md:px-6 md:py-4">
+                  <div className="font-display text-2xl md:text-3xl text-amber-eco">120+</div>
+                  <div className="font-body text-forest-800 text-[9px] md:text-xs mt-1">Panel Colors</div>
+                </div>
+                <div className="text-center border border-gray-300 p-2 md:px-6 md:py-4">
+                  <div className="font-display text-2xl md:text-3xl text-amber-eco">75%</div>
+                  <div className="font-body text-forest-800 text-[9px] md:text-xs mt-1">Recycled PET</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -115,7 +141,6 @@ export default function WorkspacesPage() {
                     <i className={`fas ${s.icon} text-amber-eco text-base`}></i>
                   </div>
                   <h4 className="font-body font-semibold text-forest-900 text-base mb-3">{s.title}</h4>
-                  <div className="card-line mb-3"></div>
                   <p className="font-body text-forest-700 text-sm leading-relaxed">{s.desc}</p>
                 </div>
               ))}
@@ -147,7 +172,7 @@ export default function WorkspacesPage() {
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10 reveal">
           <h2 className="font-display text-3xl sm:text-5xl md:text-7xl text-white mb-6">TRANSFORM YOUR<br/>WORKSPACE</h2>
           <p className="font-body text-white text-base sm:text-lg mb-8 px-2">Share your requirements and get a quick consultation from our team.</p>
-          <button onClick={() => navigate('/contact')} className="px-8 sm:px-12 py-4 sm:py-5 bg-white text-forest-900 font-body font-semibold tracking-wide hover:bg-cream-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl inline-flex items-center gap-3 text-sm sm:text-base">
+          <button onClick={() => navigate('/about')} className="px-8 sm:px-12 py-4 sm:py-5 bg-white text-forest-900 font-body font-semibold tracking-wide hover:bg-cream-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl inline-flex items-center gap-3 text-sm sm:text-base">
             GET A QUOTE <i className="fas fa-arrow-right"></i>
           </button>
         </div>

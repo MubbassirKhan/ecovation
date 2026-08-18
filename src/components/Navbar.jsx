@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
+import { PHONE_DISPLAY, PHONE_TEL } from '../data/siteData';
 
 const tabs = [
   { path: '/', label: 'Home', icon: 'fa-house' },
   { path: '/workspaces', label: 'Workspaces', icon: 'fa-building' },
+  { path: '/residency', label: 'Residency', icon: 'fa-home' },
   { path: '/acoustic', label: 'Acoustic Panels', icon: 'fa-wave-square' },
-  { path: '/contact', label: 'Contact', icon: 'fa-envelope' },
+  { path: '/about', label: 'About Us', icon: 'fa-circle-info' },
 ];
 
 export default function Navbar() {
@@ -56,15 +58,24 @@ export default function Navbar() {
               <NavLink
                 key={tab.path}
                 to={tab.path}
-                className={({ isActive }) => `px-3.5 py-2 text-sm font-medium tracking-wide transition-colors duration-300 ${isActive ? 'text-amber-eco' : 'text-forest-900 hover:text-amber-light'}`}
+                end={tab.path === '/'}
+                className={({ isActive }) => `px-3 py-2 text-sm font-medium tracking-wide transition-colors duration-300 ${isActive ? 'text-amber-eco' : 'text-forest-900 hover:text-amber-light'}`}
                 style={{ fontFamily: "'Poppins', 'Inter', sans-serif" }}
               >
                 {tab.label}
               </NavLink>
             ))}
+            <a
+              href={PHONE_TEL}
+              className="ml-4 flex items-center gap-2 px-4 py-2 border border-forest-300 text-forest-700 text-xs font-medium hover:border-amber-eco hover:text-amber-eco transition-all duration-300"
+              style={{ fontFamily: "'Poppins', 'Inter', sans-serif" }}
+            >
+              <i className="fas fa-phone text-amber-eco text-xs"></i>
+              {PHONE_DISPLAY}
+            </a>
             <NavLink
-              to="/contact"
-              className={({ isActive }) => `ml-6 px-5 py-2.5 bg-amber-eco text-forest-900 font-semibold text-sm tracking-normal hover:bg-amber-light transition-all duration-300 hover:shadow-lg hover:shadow-amber-eco/40 whitespace-nowrap border border-amber-eco ${isActive ? '' : ''}`}
+              to="/about"
+              className="ml-3 px-5 py-2.5 bg-amber-eco text-forest-900 font-semibold text-sm tracking-normal hover:bg-amber-light transition-all duration-300 hover:shadow-lg hover:shadow-amber-eco/40 whitespace-nowrap border border-amber-eco"
               style={{ fontFamily: "'Poppins', 'Inter', sans-serif" }}
             >
               GET A QUOTE
@@ -93,10 +104,11 @@ export default function Navbar() {
         style={{ fontFamily: "'Poppins', 'Inter', sans-serif" }}
       >
         <nav className="max-w-7xl mx-auto" aria-label="Mobile navigation">
-          {tabs.map((tab, index) => (
+          {tabs.map((tab) => (
             <NavLink
               key={tab.path}
               to={tab.path}
+              end={tab.path === '/'}
               className={({ isActive }) => `flex items-center gap-4 px-6 py-4 border-b border-gray-200 text-left font-medium transition-all duration-300 ${isActive ? 'text-amber-eco bg-amber-eco/5 border-l-4 border-l-amber-eco pl-5' : 'text-forest-900 hover:text-amber-eco hover:bg-gray-50/50'}`}
               style={{ fontFamily: "'Poppins', 'Inter', sans-serif" }}
             >
@@ -104,10 +116,18 @@ export default function Navbar() {
               <span className="text-base font-semibold">{tab.label}</span>
             </NavLink>
           ))}
+          {/* Phone in mobile menu */}
+          <a
+            href={PHONE_TEL}
+            className="flex items-center gap-4 px-6 py-4 border-b border-gray-200 text-forest-900 hover:text-amber-eco transition-colors"
+          >
+            <i className="fas fa-phone text-amber-eco w-5 text-base"></i>
+            <span className="text-base font-semibold">{PHONE_DISPLAY}</span>
+          </a>
         </nav>
         <div className="px-6 py-6 border-t border-gray-200 bg-gradient-to-b from-cream-50 to-gray-50">
           <NavLink
-            to="/contact"
+            to="/about"
             className="w-full py-3 bg-amber-eco text-forest-900 font-semibold tracking-wide hover:bg-amber-light transition-all duration-300 text-center block rounded-sm hover:shadow-lg shadow-amber-eco/20"
             style={{ fontFamily: "'Poppins', 'Inter', sans-serif" }}
           >

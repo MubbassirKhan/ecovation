@@ -1,49 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { panelColors, colorCategories } from '../data/panelColors';
+import { WHATSAPP_URL } from '../data/siteData';
 
 const panelTypes = [
   {
     icon: 'fa-shapes', title: 'Acoustic Baffles',
     image: '/images/Accoustic/Baffles/1.jpg',
     desc: 'Suspended vertical panels for open spaces and high ceilings. Perfect for reducing reverberation in large areas.',
-    color: 'from-forest-700 to-forest-800'
   },
   {
     icon: 'fa-th-large', title: 'Cell Ceiling Systems',
     image: '/images/Accoustic/CellCeiling/1.jpg',
     desc: 'Modular ceiling systems for comprehensive acoustic coverage. Ideal for offices and commercial spaces.',
-    color: 'from-forest-800 to-slate-eco'
   },
   {
     icon: 'fa-cut', title: 'CNC Cut Panels',
     image: '/images/Accoustic/CNC/1.jpg',
-    desc: 'Custom-designed patterns for unique aesthetic appeal. Combines functionality with artistic design elements.',
-    color: 'from-slate-eco to-forest-700'
+    desc: 'Precision-cut custom patterns for unique aesthetic appeal. Combines acoustic functionality with architectural design.',
   },
   {
     icon: 'fa-window-maximize', title: 'Acoustic Screens',
     image: '/images/Accoustic/Screens/1.jpg',
-    desc: 'Portable and flexible solutions for dynamic spaces. Perfect for creating private areas in open offices.',
-    color: 'from-forest-700 to-forest-900'
+    desc: 'Portable and flexible solutions for dynamic spaces. Perfect for creating private zones in open offices.',
   },
   {
     icon: 'fa-cloud', title: 'Acoustic Clouds',
     image: '/images/Accoustic/Clouds/1.jpg',
-    desc: 'Floating ceiling elements for decorative acoustic treatment. Adds visual interest while improving acoustics.',
-    color: 'from-forest-600 to-forest-800'
+    desc: 'Floating ceiling elements for decorative acoustic treatment. Adds visual interest while improving room acoustics.',
   },
   {
     icon: 'fa-print', title: 'Printed Panels',
     image: '/images/Accoustic/Printed/1.jpg',
-    desc: 'Custom graphics and designs on acoustic surfaces. Perfect for branding and artistic expression.',
-    color: 'from-forest-800 to-forest-600'
+    desc: 'Custom graphics and designs on acoustic surfaces. Ideal for branding, artistic expression and unique environments.',
   },
 ];
 
 const specs = [
   ['1', 'Material', '100% Polyester Fiber (PET)'],
   ['2', 'Recycled Content', '≥ 75% (post-consumer PET bottles)'],
-  ['3', 'Thickness Options', '9 mm, 12 mm (ready), 24 mm (4-wk lead time)'],
+  ['3', 'Thickness Options', '9 mm, 12 mm (ready stock), 24 mm (4-wk lead time)'],
   ['4', 'Panel Size (Standard)', '1220 × 2440 mm (9mm); 1220 × 2440/2800 mm (12mm)'],
   ['5', 'Density', '1900 GSM for 9 mm; 2400 GSM for 12 mm'],
   ['6', 'Weight', '~5.6 kg/panel (9mm), ~7.2 kg/panel (12mm)'],
@@ -51,67 +47,75 @@ const specs = [
   ['8', 'Fire Rating', 'EN13501-1: B-s1, d0'],
   ['9', 'VOC Emission', 'Low VOC, <0.5 mg/m²/hr (ISO tested)'],
   ['10', 'Moisture Resistance', 'Non-hygroscopic / Mold resistant'],
-  ['11', 'Colour Options', '73 standard colours'],
+  ['11', 'Colour Options', '120+ standard colours (EP series)'],
   ['12', 'Surface Finish', 'Smooth, pin-receptive, printable'],
   ['13', 'Applications', 'Walls, ceilings, screens, furniture, lighting'],
 ];
 
 const spaces = [
-  { icon: 'fa-building', title: 'Offices', desc: 'Enhance productivity with smart noise control' },
-  { icon: 'fa-headphones', title: 'Studios', desc: 'Professional sound isolation & treatment' },
+  { icon: 'fa-building', title: 'Corporate Offices', desc: 'Enhance productivity with smart noise control' },
+  { icon: 'fa-microphone', title: 'Studios', desc: 'Professional sound isolation & treatment' },
   { icon: 'fa-hospital', title: 'Healthcare', desc: 'Hygienic, mold-resistant solutions' },
   { icon: 'fa-graduation-cap', title: 'Education', desc: 'Better learning through clear acoustics' },
-  { icon: 'fa-utensils', title: 'Hospitality', desc: 'Create inviting, comfortable spaces' },
-  { icon: 'fa-home', title: 'Residential', desc: 'Peaceful, quality sound environments' },
+  { icon: 'fa-utensils', title: 'Hospitality', desc: 'Create inviting, comfortable dining spaces' },
+  { icon: 'fa-home', title: 'Residential', desc: 'Peaceful, quality sound environments at home' },
 ];
 
 const customizations = [
-  { icon: 'fa-palette', title: '73 Colors', desc: 'Match any interior design perfectly' },
-  { icon: 'fa-crop', title: 'Custom Shapes', desc: 'Geometric patterns & unique designs' },
-  { icon: 'fa-print', title: 'Printed Graphics', desc: 'Branding & artistic expressions' },
-  { icon: 'fa-expand', title: 'Any Size', desc: 'Custom dimensions & thickness' },
-  { icon: 'fa-lightbulb', title: 'LED Lighting', desc: 'Integrated lighting solutions' },
-  { icon: 'fa-cog', title: 'Any Installation', desc: 'Walls, ceilings, baffles & more' },
-];
-
-const colors = [
-  '#2d5a3d','#1a3d2a','#4a7c5e','#8fbc8f','#c8e6c9','#f1f8e9',
-  '#3e2723','#6d4c41','#a1887f','#d7ccc8','#efebe9','#fbe9e7',
-  '#1a237e','#283593','#3949ab','#5c6bc0','#7986cb','#9fa8da',
-  '#e65100','#ef6c00','#f57c00','#fb8c00','#ffa726','#ffcc02',
-  '#880e4f','#ad1457','#c2185b','#e91e63','#f06292','#f8bbd0',
-  '#006064','#00838f','#0097a7','#00bcd4','#4dd0e1','#b2ebf2',
-  '#33691e','#558b2f','#689f38','#8bc34a','#aed581','#dcedc8',
-  '#37474f','#455a64','#546e7a','#607d8b','#90a4ae','#cfd8dc',
+  { icon: 'fa-palette', title: '120+ Colors', desc: 'Match any interior design perfectly' },
+  { icon: 'fa-cut', title: 'CNC Cutting', desc: 'Geometric patterns & unique custom designs' },
+  { icon: 'fa-print', title: 'Printed Graphics', desc: 'Branding & artistic surface expressions' },
+  { icon: 'fa-expand', title: 'Custom Sizes', desc: 'Custom dimensions & thickness options' },
+  { icon: 'fa-lightbulb', title: 'LED Lighting', desc: 'Integrated lighting panel solutions' },
+  { icon: 'fa-cog', title: 'Any Installation', desc: 'Walls, ceilings, baffles & screens' },
 ];
 
 export default function AcousticPage() {
   const navigate = useNavigate();
   const [selectedColor, setSelectedColor] = useState(null);
   const [activeSpec, setActiveSpec] = useState(null);
+  const [activeCategory, setActiveCategory] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filteredColors = useMemo(() => {
+    return panelColors.filter(c => {
+      const matchCat = activeCategory === 'All' || c.category === activeCategory;
+      const q = searchQuery.toLowerCase();
+      const matchSearch = !q || c.code.toLowerCase().includes(q) || c.name.toLowerCase().includes(q) || c.category.toLowerCase().includes(q);
+      return matchCat && matchSearch;
+    });
+  }, [activeCategory, searchQuery]);
 
   return (
     <div id="main-content">
+
       {/* Hero */}
       <section className="relative py-36 bg-cream-50 grid-bg overflow-hidden">
         <div className="absolute top-0 right-0 w-1 h-full bg-amber-eco"></div>
-        <div className="absolute top-16 left-16 w-32 h-32 border border-amber-eco/15"></div>
-        <div className="absolute bottom-16 left-32 w-16 h-16 border border-amber-eco/10"></div>
+        <div className="absolute top-16 left-16 w-32 h-32 border border-amber-eco/15 hidden lg:block"></div>
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12">
             <div className="text-center lg:text-left">
               <div className="inline-flex items-center gap-2 border border-amber-eco/30 px-4 py-2 mb-8 mx-auto lg:mx-0">
                 <span className="w-1.5 h-1.5 bg-amber-eco"></span>
-                <span className="font-body text-amber-eco text-[10px] sm:text-xs tracking-[0.2em] uppercase text-center">PET Acoustic Solutions • Made in India</span>
+                <span className="font-body text-amber-eco text-[10px] sm:text-xs tracking-[0.2em] uppercase">PET Acoustic Solutions • Made in India</span>
               </div>
               <h1 className="font-display text-5xl md:text-9xl text-forest-900 leading-none">
                 ACOUSTIC<br/><span className="text-gradient">PANELS</span>
               </h1>
             </div>
             <div className="lg:max-w-sm text-center lg:text-left mt-8 lg:mt-0">
-              <p className="font-body text-forest-900 text-base md:text-lg leading-relaxed mb-10 mx-auto lg:mx-0">
-                Advanced sound solutions made from 100% recycled PET materials for superior acoustic performance and sustainable design.
+              <p className="font-body text-forest-900 text-base md:text-lg leading-relaxed mb-8 mx-auto lg:mx-0">
+                Advanced sound solutions made from 100% recycled PET materials for superior acoustic performance and sustainable interior design.
               </p>
+              <div className="flex flex-col sm:flex-row gap-4 items-center sm:items-start justify-center lg:justify-start mb-6">
+                <button className="w-full sm:w-auto px-6 py-3 bg-amber-eco text-forest-900 font-body font-semibold hover:bg-amber-light transition-all duration-300 hover:shadow-xl hover:shadow-amber-eco/30 flex items-center justify-center gap-2 text-sm border border-amber-eco">
+                  <i className="fas fa-palette text-xs"></i> Explore Panels
+                </button>
+                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto px-6 py-3 border border-forest-900 text-forest-900 font-body font-semibold hover:bg-forest-900 hover:text-white transition-all duration-300 flex items-center justify-center gap-2 text-sm">
+                  <i className="fab fa-whatsapp"></i> Chat
+                </a>
+              </div>
               <div className="grid grid-cols-3 gap-2 md:gap-3">
                 <div className="text-center border border-gray-300 p-2 md:px-6 md:py-4">
                   <div className="font-display text-2xl md:text-3xl text-amber-eco">0.95</div>
@@ -122,8 +126,8 @@ export default function AcousticPage() {
                   <div className="font-body text-forest-800 text-[9px] md:text-xs mt-1">Recycled Content</div>
                 </div>
                 <div className="text-center border border-gray-300 p-2 md:px-6 md:py-4">
-                  <div className="font-display text-2xl md:text-3xl text-amber-eco">73</div>
-                  <div className="font-body text-forest-800 text-[9px] md:text-xs mt-1">Colors Available</div>
+                  <div className="font-display text-2xl md:text-3xl text-amber-eco">120+</div>
+                  <div className="font-body text-forest-800 text-[9px] md:text-xs mt-1">Panel Colors</div>
                 </div>
               </div>
             </div>
@@ -143,7 +147,7 @@ export default function AcousticPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {panelTypes.map((p, i) => (
               <div key={i} className={`group relative border border-gray-300 hover:border-amber-eco transition-all duration-500 overflow-hidden reveal delay-${(i%3+1)*100}`}>
-                <div className={`aspect-video overflow-hidden relative`}>
+                <div className="aspect-video overflow-hidden relative">
                   <img 
                     src={p.image} 
                     alt={p.title} 
@@ -152,10 +156,9 @@ export default function AcousticPage() {
                   <div className="absolute inset-0 bg-forest-900/20 group-hover:bg-transparent transition-colors duration-300"></div>
                 </div>
                 <div className="p-6 bg-cream-50 group-hover:bg-gray-100 transition-colors">
-                  <h4 className="font-body font-semibold text-forest-900 text-base mb-2 flex items-center gap-2">
+                  <h4 className="font-body font-semibold text-forest-900 text-base mb-3 flex items-center gap-2">
                     <i className={`fas ${p.icon} text-amber-eco text-xs`}></i> {p.title}
                   </h4>
-                  <div className="card-line mb-3"></div>
                   <p className="font-body text-forest-800 text-xs leading-relaxed">{p.desc}</p>
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-eco transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
@@ -177,8 +180,8 @@ export default function AcousticPage() {
               </p>
               <div className="space-y-4">
                 {[
-                  { icon: 'fa-volume-mute', title: 'Superior Sound Absorption', desc: 'NRC ratings from 0.30 to 0.95 depending on thickness and mounting' },
-                  { icon: 'fa-tools', title: 'Versatile Applications', desc: 'Suitable for walls, ceilings, partition screens, furniture, and lighting' },
+                  { icon: 'fa-volume-mute', title: 'Superior Sound Absorption', desc: 'NRC ratings from 0.30 to 0.95 depending on thickness and mounting method' },
+                  { icon: 'fa-tools', title: 'Versatile Applications', desc: 'Suitable for walls, ceilings, partition screens, furniture, and integrated lighting' },
                   { icon: 'fa-print', title: 'Customizable Surface', desc: 'Smooth, pin-receptive, printable surface for unlimited design possibilities' },
                   { icon: 'fa-droplet', title: 'Moisture Resistant', desc: 'Non-hygroscopic and mold-resistant for long-lasting performance' },
                 ].map(f => (
@@ -199,9 +202,9 @@ export default function AcousticPage() {
                   {[
                     { num: '01', title: '100% Recycled', sub: 'Eco-friendly PET materials' },
                     { num: '02', title: 'NRC 0.95', sub: 'Professional-grade performance' },
-                    { num: '03', title: '38 Years', sub: 'Industry experience' },
-                    { num: '04', title: 'Design-Build', sub: 'Complete service' },
-                    { num: '05', title: '73 Colors', sub: 'Full customization' },
+                    { num: '03', title: '15+ Years', sub: 'Industry experience' },
+                    { num: '04', title: 'Design-Build', sub: 'Complete turnkey service' },
+                    { num: '05', title: '120+ Colors', sub: 'Full EP-series palette' },
                     { num: '06', title: 'Fire-Rated', sub: 'EN13501-1: B-s1,d0' },
                   ].map(w => (
                     <div key={w.num} className="bg-cream-50 hover:bg-gray-100 transition-colors p-5 group">
@@ -217,39 +220,107 @@ export default function AcousticPage() {
         </div>
       </section>
 
-      {/* Color Picker */}
-      <section className="py-24 bg-cream-50">
+      {/* 120+ Colour Catalogue */}
+      <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-12 reveal">
-            <span className="font-body text-amber-eco text-xs tracking-[0.3em] uppercase font-semibold">Fully Customizable</span>
-            <h2 className="font-display text-5xl md:text-7xl text-forest-900 mt-2">73 <span className="text-gradient">COLORS</span></h2>
-            <p className="font-body text-forest-900 mt-4">Click a color to preview it on your panel</p>
+            <span className="font-body text-amber-eco text-xs tracking-[0.3em] uppercase font-semibold">EP Series Panel Colours</span>
+            <h2 className="font-display text-5xl md:text-7xl text-forest-900 mt-2">120+ <span className="text-gradient">COLORS</span></h2>
+            <p className="font-body text-forest-700 mt-4 text-sm md:text-base">Browse our complete EP-series colour range. Click any swatch to preview.</p>
           </div>
-          <div className="reveal">
-            <div className="grid grid-cols-6 md:grid-cols-12 gap-1.5 md:gap-2 mb-8">
-              {colors.map((color, i) => (
-                <button
-                  key={i}
-                  onClick={() => setSelectedColor(color)}
-                  className={`aspect-square border transition-all duration-200 hover:scale-110 hover:z-10 relative ${selectedColor === color ? 'border-amber-eco scale-110 shadow-lg' : 'border-transparent'}`}
-                  style={{ backgroundColor: color }}
-                  title={color}
+
+          {/* Filters & Search */}
+          <div className="reveal mb-8">
+            <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+              {/* Search */}
+              <div className="relative w-full sm:w-64">
+                <i className="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-forest-400 text-xs"></i>
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={e => setSearchQuery(e.target.value)}
+                  placeholder="Search by code or name…"
+                  className="w-full pl-9 pr-4 py-2.5 border border-gray-300 text-forest-900 font-body text-sm bg-gray-50 focus:border-amber-eco"
                 />
+              </div>
+              {/* Count */}
+              <p className="font-body text-forest-600 text-xs">{filteredColors.length} colours shown</p>
+            </div>
+
+            {/* Category tabs */}
+            <div className="flex flex-wrap gap-2 mt-4">
+              {colorCategories.map(cat => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-4 py-1.5 text-xs font-body font-semibold tracking-wide uppercase transition-all duration-200 border ${activeCategory === cat ? 'bg-amber-eco border-amber-eco text-forest-900' : 'border-gray-300 text-forest-700 hover:border-amber-eco hover:text-amber-eco bg-white'}`}
+                >
+                  {cat}
+                </button>
               ))}
             </div>
+          </div>
+
+          {/* Colour Grid */}
+          <div className="reveal">
+            <div className="grid grid-cols-5 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 gap-2 mb-8">
+              {filteredColors.map((color) => (
+                <button
+                  key={color.code}
+                  onClick={() => setSelectedColor(selectedColor?.code === color.code ? null : color)}
+                  title={`${color.code} — ${color.name}`}
+                  className={`group relative aspect-square transition-all duration-200 ${selectedColor?.code === color.code ? 'ring-2 ring-amber-eco ring-offset-2 scale-110 z-10' : 'hover:scale-110 hover:z-10 hover:ring-1 hover:ring-amber-eco/50 hover:ring-offset-1'}`}
+                  style={{ backgroundColor: color.hex }}
+                >
+                  {/* Tooltip on hover */}
+                  <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-forest-900 text-white text-[9px] px-2 py-1 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-20 font-body font-semibold">
+                    {color.code}
+                  </div>
+                </button>
+              ))}
+            </div>
+
+            {/* No results */}
+            {filteredColors.length === 0 && (
+              <div className="text-center py-12">
+                <i className="fas fa-palette text-3xl text-gray-300 mb-4 block"></i>
+                <p className="font-body text-forest-600 text-sm">No colours match your search.</p>
+              </div>
+            )}
+
+            {/* Selected color detail */}
             {selectedColor && (
-              <div className="flex items-center gap-6 p-4 border border-amber-eco/30 bg-gray-100">
-                <div className="w-16 h-16 flex-shrink-0" style={{ backgroundColor: selectedColor }}></div>
-                <div>
-                  <p className="font-body text-forest-900 font-medium">Selected Color</p>
-                  <p className="font-body text-forest-800 text-sm">{selectedColor.toUpperCase()}</p>
-                  <p className="font-body text-forest-900 text-xs mt-1">This color is available for all panel types and thicknesses.</p>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 p-5 border border-amber-eco/40 bg-amber-eco/3">
+                <div 
+                  className="w-16 h-16 flex-shrink-0 shadow-md border border-gray-200"
+                  style={{ backgroundColor: selectedColor.hex }}
+                ></div>
+                <div className="flex-1 min-w-0">
+                  <p className="font-body text-forest-900 font-semibold text-base">{selectedColor.name}</p>
+                  <p className="font-body text-amber-eco text-sm font-mono font-bold mt-0.5">{selectedColor.code}</p>
+                  <div className="flex flex-wrap items-center gap-3 mt-2">
+                    <span className="inline-flex items-center gap-1.5 border border-gray-300 px-2.5 py-1 text-xs font-body text-forest-700">
+                      <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: selectedColor.hex }}></span>
+                      {selectedColor.category}
+                    </span>
+                    <span className="font-body text-forest-600 text-xs font-mono">{selectedColor.hex.toUpperCase()}</span>
+                    <span className="font-body text-gray-400 text-xs">· Digital approximation of physical sample</span>
+                  </div>
+                  <p className="font-body text-forest-700 text-xs mt-2">Available in all panel types, thicknesses, and custom sizes.</p>
                 </div>
-                <button onClick={() => setSelectedColor(null)} className="ml-auto text-forest-800 hover:text-forest-900">
-                  <i className="fas fa-times"></i>
+                <button onClick={() => setSelectedColor(null)} className="text-forest-500 hover:text-forest-900 transition-colors p-1 flex-shrink-0">
+                  <i className="fas fa-times text-sm"></i>
                 </button>
               </div>
             )}
+
+            {/* Disclaimer */}
+            <div className="mt-6 flex items-start gap-3 p-4 bg-gray-50 border border-gray-200">
+              <i className="fas fa-info-circle text-amber-eco text-sm flex-shrink-0 mt-0.5"></i>
+              <p className="font-body text-forest-600 text-xs leading-relaxed">
+                <strong className="text-forest-800">Colour Accuracy Note:</strong> Colours shown on screen are digital approximations of the physical PET panel samples. Actual colours may vary due to display settings, screen calibration, and the material characteristics of the physical acoustic panels. Always request a physical sample before final selection.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -275,7 +346,7 @@ export default function AcousticPage() {
         </div>
       </section>
 
-      {/* Spaces */}
+      {/* Applications */}
       <section className="py-24 bg-cream-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16 reveal">
@@ -333,15 +404,20 @@ export default function AcousticPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-cream-50 relative overflow-hidden">
-        <div className="absolute inset-0 grid-bg opacity-20"></div>
+      <section className="py-24 bg-forest-900 relative overflow-hidden">
+        <div className="absolute inset-0 grid-bg opacity-5"></div>
         <div className="absolute right-0 top-0 w-1 h-full bg-amber-eco"></div>
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10 reveal">
-          <h2 className="font-display text-6xl md:text-8xl text-forest-900 mb-6 leading-none">READY TO<br/><span className="text-gradient">UPGRADE?</span></h2>
-          <p className="font-body text-forest-900 text-lg mb-10">Get a custom quote for your acoustic panel requirements.</p>
-          <button onClick={() => navigate('/contact')} className="px-12 py-5 bg-amber-eco text-forest-900 font-body font-semibold tracking-wide hover:bg-amber-light transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-amber-eco/30 inline-flex items-center gap-3">
-            GET A QUOTE <i className="fas fa-arrow-right"></i>
-          </button>
+          <h2 className="font-display text-6xl md:text-8xl text-white mb-6 leading-none">GET YOUR<br/><span className="text-amber-eco">PANELS</span></h2>
+          <p className="font-body text-gray-400 text-lg mb-10">Get a custom quote for your acoustic panel requirements. Request physical samples before final selection.</p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button onClick={() => navigate('/about')} className="px-12 py-5 bg-amber-eco text-forest-900 font-body font-semibold tracking-wide hover:bg-amber-light transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-amber-eco/30 inline-flex items-center justify-center gap-3">
+              GET A QUOTE <i className="fas fa-arrow-right"></i>
+            </button>
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="px-12 py-5 border border-gray-700 text-gray-300 font-body font-semibold hover:border-green-400 hover:text-green-400 transition-all duration-300 inline-flex items-center justify-center gap-3">
+              <i className="fab fa-whatsapp text-green-400"></i> WhatsApp Us
+            </a>
+          </div>
         </div>
       </section>
     </div>
