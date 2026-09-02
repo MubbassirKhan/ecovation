@@ -432,15 +432,17 @@ export default function HomePage() {
             {teamMembers.map((member, i) => {
               const isRight = i % 2 === 1;
               return (
-                <div key={i} className="group border border-gray-200 hover:border-amber-eco/50 hover:shadow-xl transition-all duration-500 reveal bg-white rounded-lg overflow-hidden flex flex-col">
+                <div key={i} className={`team-card team-card-home group reveal ${isRight ? 'md:translate-y-4' : ''}`}>
                   {/* Portrait */}
-                  <div className="aspect-[16/9] bg-gray-100 overflow-hidden relative">
+                  <div className="team-visual aspect-[4/5] sm:aspect-[16/11] lg:aspect-[16/9]">
                     {member.image ? (
-                      <img
-                        src={member.image}
-                        alt={member.name}
-                        className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                      />
+                      <div className="team-photo-frame">
+                        <img
+                          src={member.image}
+                          alt={member.name}
+                          className="team-photo"
+                        />
+                      </div>
                     ) : (
                       <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200">
                         <div className={`w-full px-8 ${isRight ? 'flex flex-col items-end' : 'flex flex-col items-start'}`}>
@@ -451,13 +453,12 @@ export default function HomePage() {
                         </div>
                       </div>
                     )}
-                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-amber-eco group-hover:h-1.5 transition-all duration-300"></div>
                   </div>
                   {/* Content */}
-                  <div className="p-8 flex-1 flex flex-col">
+                  <div className="team-content team-content-home">
                     <h3 className="font-display text-3xl text-forest-900 font-bold mb-1 text-center">{member.name}</h3>
-                    <p className="font-body text-amber-eco text-xs tracking-widest uppercase font-semibold mb-5 text-center">{member.role}</p>
-                    <div className="w-12 h-0.5 bg-amber-eco mb-5 mx-auto"></div>
+                    <p className="team-role font-body text-amber-eco text-xs tracking-widest uppercase font-semibold text-center">{member.role}</p>
+                    <div className="team-role-line mx-auto"></div>
                     <p className="font-body text-forest-700 text-sm leading-relaxed text-justify">{member.bio}</p>
                   </div>
                 </div>

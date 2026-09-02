@@ -30,14 +30,14 @@ export const teamMembers = [
   {
     name: 'Sharukh',
     role: 'Founder & Operations Head',
-    image: '', // ← Replace with actual image URL
+    image: '/images/founder.png',
     bio: 'Sharukh, Founder and Operations Head, is the visionary backbone of Ecovation—shaping the company\'s execution ethos with foresight, discipline, and an unyielding commitment to excellence. His ability to blend strategic thinking with hands-on operational mastery transforms complex ideas into flawlessly delivered spaces. Under his leadership, every project reflects precision, innovation, and the signature craftsmanship that defines Ecovation\'s identity.',
     initials: 'S',
   },
   {
     name: 'Nida',
     role: 'Co-Founder & Business Development Head',
-    image: '', // ← Replace with actual image URL
+    image: '/images/co-founder.png',
     bio: 'Nida is the driving force behind our growth—blending sharp business insight with a natural flair for building meaningful client relationships. As Co-Founder and Business Development Head, she transforms opportunities into long-term partnerships and ensures our projects reflect the elegance, precision, and innovation our brand stands for. Confident, intuitive, and growth-focused, Nida is at the heart of our expanding vision.',
     initials: 'N',
   },

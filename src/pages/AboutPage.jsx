@@ -200,15 +200,17 @@ export default function AboutPage() {
             {teamMembers.map((member, i) => {
               const isRight = i % 2 === 1;
               return (
-                <div key={i} className={`group border border-gray-200 hover:border-amber-eco/50 hover:shadow-xl transition-all duration-500 reveal bg-white rounded-lg overflow-hidden flex flex-col`}>
+                <div key={i} className={`team-card group reveal ${isRight ? 'md:translate-y-4' : ''}`}>
                   {/* Portrait */}
-                  <div className="aspect-[16/9] bg-gray-100 overflow-hidden relative">
+                  <div className="team-visual aspect-[4/5] sm:aspect-[16/11] lg:aspect-[16/9]">
                     {member.image ? (
-                      <img
-                        src={member.image}
-                        alt={member.name}
-                        className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                      />
+                      <div className="team-photo-frame">
+                        <img
+                          src={member.image}
+                          alt={member.name}
+                          className="team-photo"
+                        />
+                      </div>
                     ) : (
                       <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200">
                         <div className={`text-center ${isRight ? 'text-right pr-8' : 'text-left pl-8'} w-full`}>
@@ -219,14 +221,13 @@ export default function AboutPage() {
                         </div>
                       </div>
                     )}
-                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-amber-eco group-hover:h-1.5 transition-all duration-300"></div>
                   </div>
 
                   {/* Content — left card aligns left, right card aligns right */}
-                  <div className={`p-8 flex-1 flex flex-col ${isRight ? 'items-end text-right' : 'items-start text-left'}`}>
+                  <div className={`team-content ${isRight ? 'items-end text-right' : 'items-start text-left'}`}>
                     <h3 className="font-display text-3xl text-forest-900 font-bold mb-1">{member.name}</h3>
-                    <p className="font-body text-amber-eco text-xs tracking-widest uppercase font-semibold mb-6">{member.role}</p>
-                    <div className={`w-12 h-0.5 bg-amber-eco mb-6 ${isRight ? 'ml-auto' : 'mr-auto'}`}></div>
+                    <p className="team-role font-body text-amber-eco text-xs tracking-widest uppercase font-semibold">{member.role}</p>
+                    <div className={`team-role-line ${isRight ? 'ml-auto' : 'mr-auto'}`}></div>
                     <p className="font-body text-forest-700 text-sm leading-relaxed text-justify">{member.bio}</p>
                   </div>
                 </div>
