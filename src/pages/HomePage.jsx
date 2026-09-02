@@ -133,7 +133,7 @@ export default function HomePage() {
             {/* Positioning badge */}
             <div className={`inline-flex items-center gap-2 border border-amber-eco/50 px-4 py-2 mb-6 mx-auto lg:mx-0 transition-all duration-700 delay-100 ${heroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
               <span className="w-1.5 h-1.5 bg-amber-eco rounded-full"></span>
-              <span className="font-body text-amber-eco text-xs tracking-widest uppercase">Interior Turnkey Solutions</span>
+              <span className="font-body text-amber-eco text-xs tracking-widest uppercase">Ecovation interiors- Turnkey projects and Acoustic panels</span>
             </div>
 
             <h1 className={`font-display leading-tight mb-6 md:mb-8 transition-all duration-700 delay-200 ${heroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
@@ -234,7 +234,7 @@ export default function HomePage() {
               <div className="relative group">
                 <div className="bg-gray-300 border border-gray-400 aspect-[4/5] overflow-hidden rounded-lg shadow-lg">
                   <img 
-                    src="/images/Projects/project7.jpeg" 
+                    src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=80" 
                     alt="Workspace Project" 
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
@@ -253,7 +253,7 @@ export default function HomePage() {
               <div className="relative group">
                 <div className="bg-gray-300 border border-gray-400 aspect-[4/5] overflow-hidden rounded-lg shadow-lg">
                   <img 
-                    src="/images/Projects/project8.jpeg" 
+                    src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1600&q=80" 
                     alt="Acoustic Project" 
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />

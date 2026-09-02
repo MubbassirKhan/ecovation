@@ -37,7 +37,7 @@ const roomTypes = [
     icon: 'fa-pen-ruler',
     title: 'Custom Residential Interiors',
     desc: 'Solutions tailored entirely to the homeowner\'s lifestyle, available space and personal preferences. Every detail designed around you.',
-    image: '/images/Projects/project7.jpeg',
+    image: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=80',
   },
 ];
 

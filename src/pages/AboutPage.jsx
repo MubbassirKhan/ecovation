@@ -115,7 +115,7 @@ export default function AboutPage() {
               <div className="relative group">
                 <div className="aspect-[4/5] overflow-hidden border border-gray-300 rounded-lg shadow-lg">
                   <img
-                    src="/images/Projects/project7.jpeg"
+                    src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=80"
                     alt="Ecovation Design"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />

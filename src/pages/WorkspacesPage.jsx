@@ -103,7 +103,7 @@ export default function WorkspacesPage() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="col-span-2 bg-gray-200 border border-gray-300 aspect-video overflow-hidden group relative">
                   <img 
-                    src="/images/Projects/project10.jpeg" 
+                    src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80" 
                     alt="Modern Office Design" 
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />

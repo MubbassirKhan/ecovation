@@ -43,7 +43,7 @@ export default function Navbar() {
           {/* Logo */}
           <NavLink to="/" className="flex items-center gap-2.5 group">
             <img 
-              src="/images/logos/logo_no_bg_black.png" 
+              src="/logo.png" 
               alt="Ecovation Logo" 
               className="h-10 w-auto transition-transform group-hover:scale-110"
             />
